@@ -1,0 +1,4 @@
+1. Write a method that takes an integer as an argument and returns its factorial. The factorial of a number 𝑛n (denoted as 𝑛!n!) is the product of all integers from 1 to 𝑛.
+2. Write a method that takes a string and determines whether it is a palindrome (reads the same forwards and backwards). For example, "level" is palindrome.
+3. Write a method that takes an integer and returns the sum of its digits.
+ For example, for the number 123, the sum of its digits would be 6 (1 + 2 + 3)
