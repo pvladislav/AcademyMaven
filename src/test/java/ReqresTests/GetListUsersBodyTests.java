@@ -1,19 +1,31 @@
 package ReqresTests;
 
+import io.qameta.allure.Allure;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static ReqresTests.EqualToIgnoringCaseAndWhitespace.equalToIgnoringCaseAndWhitespace;
+import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.equalTo;
 
 public class GetListUsersBodyTests {
 
     @BeforeClass void setUp() {
         RestAssured.baseURI = "https://reqres.in";
+    }
+
+    @Test void getListUsers() {
+
+        String url = "https://reqres.in/api/users?page=2";
+        Response response = get(url);
+        Allure.addAttachment("URL", url);
+        Allure.addAttachment("Response body" , response.body().prettyPrint());
+        Allure.addAttachment("Response body" , String.valueOf(response.statusCode()));
+
+        response.then().assertThat().statusCode(200);
     }
 
     @Test void getListUsersBodyCheck() {
@@ -46,11 +58,5 @@ public class GetListUsersBodyTests {
         Response response = given()
                 .get("https://reqres.in/api/users?page=2");
         response.prettyPrint();
-    }
-
-    @Test void getListUsers() {
-        Response response = RestAssured.get("https://reqres.in/api/users?page=2");
-        System.out.printf("Response status code = %d %n", response.statusCode());
-        System.out.println(response.getBody().asString());
     }
 }
