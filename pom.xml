@@ -58,7 +58,7 @@
 
     <profiles>
         <profile>
-            <id>api</id>
+            <id>API</id>
             <build>
                 <plugins>
                     <plugin>

@@ -48,11 +48,9 @@ public class GetListUsersBodyTests {
         response.prettyPrint();
     }
 
-    @Test
-    void getListUsers1() {
+    @Test void getListUsers() {
         Response response = RestAssured.get("https://reqres.in/api/users?page=2");
         System.out.printf("Response status code = %d %n", response.statusCode());
-        System.out.println(response.getHeader("page").equals(null));
         System.out.println(response.getBody().asString());
     }
 }
