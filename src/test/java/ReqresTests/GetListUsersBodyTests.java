@@ -8,23 +8,12 @@ import org.testng.annotations.Test;
 import static ReqresTests.EqualToIgnoringCaseAndWhitespace.equalToIgnoringCaseAndWhitespace;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
 
-public class GetRequests {
+public class GetListUsersBodyTests {
 
     @BeforeClass void setUp() {
         RestAssured.baseURI = "https://reqres.in";
-    }
-
-    @Test void getListUsersHeaderCheck() {
-        given()
-                .when()
-                .get("https://reqres.in/api/users?page=2")
-                .then()
-                .statusCode(200)
-                .header("Content-Type", equalTo("application/json; charset=utf-8"))
-                .header("Connection", equalTo("keep-alive"))
-                .header("CF-RAY", not(equalTo("884b85456c1998a3-OTP")))
-                .header("String", nullValue());
     }
 
     @Test void getListUsersBodyCheck() {
@@ -65,38 +54,5 @@ public class GetRequests {
         System.out.printf("Response status code = %d %n", response.statusCode());
         System.out.println(response.getHeader("page").equals(null));
         System.out.println(response.getBody().asString());
-    }
-
-   @Test void getSingleUser() {
-        given()
-                .when()
-                .get("https://reqres.in/api/users/2")
-                .then()
-                .assertThat()
-                .body("data.email", containsString("@reqres.in"))
-                .body("data.avatar", not(equalTo("https://google.com/img/faces/2-image.jpg")))
-                .body("support.text", containsString("ReqRes"));
-    }
-
-    @Test void getSingleUserNotFound() {
-        given()
-                .when()
-                .get("/api/users/23")
-                .then()
-                .assertThat()
-                .statusCode(404)
-                .body(equalTo("{}"));
-    }
-
-    @Test   public void testGetSingleUser() {
-
-        given()
-                .when()
-                .get("https://reqres.in/api/users/2")
-                .then()
-                .assertThat()
-                .statusCode(200)
-                .assertThat()
-                .body("data.id", equalTo(2));
     }
 }
