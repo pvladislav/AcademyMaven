@@ -26,7 +26,7 @@ public class GetRequests {
                 .header("CF-RAY", not(equalTo("884b85456c1998a3-OTP")))
                 .header("String", nullValue());
     }
-//test
+
     @Test void getListUsersBodyCheck() {
         given()
                 .when()
